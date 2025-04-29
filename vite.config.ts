@@ -21,6 +21,11 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
+    test: {
+      environment: "jsdom",
+      setupFiles: ["./vitest-setup.js"],
+      globals: true,
+    },
     server: {
       port: Number(VITE_PORT),
     },
