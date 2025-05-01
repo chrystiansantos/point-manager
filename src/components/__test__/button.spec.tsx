@@ -1,23 +1,23 @@
-import { PrimaryButton } from "@/components/button";
+import { Button } from "@/components/button";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 describe("PrimaryButton", () => {
   it("should render the button", () => {
-    render(<PrimaryButton variant="primary">Click me</PrimaryButton>);
+    render(<Button variant="primary">Click me</Button>);
     const button = screen.getByRole("button", { name: /click me/i });
     expect(button).toBeInTheDocument();
   });
 
   it("should apply primary variant styles", () => {
-    render(<PrimaryButton variant="primary">Primary</PrimaryButton>);
+    render(<Button variant="primary">Primary</Button>);
     const button = screen.getByRole("button", { name: /primary/i });
     expect(button).toHaveClass("bg-red-500");
     expect(button).not.toHaveClass("border-2");
   });
 
   it("should apply secondary variant styles", () => {
-    render(<PrimaryButton variant="secondary">Secondary</PrimaryButton>);
+    render(<Button variant="secondary">Secondary</Button>);
     const button = screen.getByRole("button", { name: /secondary/i });
     expect(button).toHaveClass("bg-neutral-light");
     expect(button).toHaveClass("border-2");
@@ -26,9 +26,9 @@ describe("PrimaryButton", () => {
 
   it("should merge custom className with default classes", () => {
     render(
-      <PrimaryButton variant="primary" className="custom-class">
+      <Button variant="primary" className="custom-class">
         Custom
-      </PrimaryButton>,
+      </Button>,
     );
     const button = screen.getByRole("button", { name: /custom/i });
     expect(button).toHaveClass("custom-class");
@@ -38,9 +38,9 @@ describe("PrimaryButton", () => {
   it("should handle click events", () => {
     const handleClick = vi.fn();
     render(
-      <PrimaryButton variant="primary" onClick={handleClick}>
+      <Button variant="primary" onClick={handleClick}>
         Clickable
-      </PrimaryButton>,
+      </Button>,
     );
     const button = screen.getByRole("button", { name: /clickable/i });
     fireEvent.click(button);

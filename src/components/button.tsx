@@ -5,11 +5,7 @@ type PrimaryButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant: "primary" | "secondary";
 };
 
-export function PrimaryButton({
-  className,
-  variant,
-  ...rest
-}: PrimaryButtonProps) {
+export function Button({ className, variant, ...rest }: PrimaryButtonProps) {
   return (
     <button
       className={twMerge(
