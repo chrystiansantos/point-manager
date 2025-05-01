@@ -1,6 +1,6 @@
+import soy from "@/assets/soy.svg";
 import type { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
-
 interface ListPointsTitleProps {
   title: string;
 }
@@ -106,7 +106,13 @@ export function PointDetail({
       onClick={selectPoint}
     >
       <strong className="text-neutral-dark-900 flex items-center gap-1 text-sm font-medium">
-        <img className="size-4" src="beans.svg" alt="" width={15} height={15} />
+        <img
+          className="size-4"
+          src={soy}
+          alt="icon soy"
+          width={15}
+          height={15}
+        />
         Ponto nº {name}
       </strong>
       <span className="text-neutral-dark-500 flex gap-2 text-xs">

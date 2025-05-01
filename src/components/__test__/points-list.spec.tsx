@@ -1,3 +1,4 @@
+import soy from "@/assets/soy.svg";
 import { ListPoints } from "@/components/points-list";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
@@ -92,5 +93,22 @@ describe("ListPoints.PointDetail", () => {
     );
 
     expect(getByRole("button")).toHaveClass("bg-neutral-light-50");
+  });
+
+  it("should correctly icon soy", () => {
+    const { getByAltText } = render(
+      <ListPoints.PointDetail
+        name="123"
+        createdAt={mockDate}
+        selected={true}
+        selectPoint={mockSelectPoint}
+        disabled={false}
+      />,
+    );
+
+    const image = getByAltText("icon soy");
+
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute("src", soy);
   });
 });
