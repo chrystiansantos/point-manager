@@ -10,13 +10,16 @@ interface Pin {
   createdAt: Date;
 }
 
-export interface Area {
+export interface UpdateAreaDTO {
   id: string;
   name: string;
   position: Position[];
   pins: Pin[];
 }
 
-export async function getAreas(): Promise<Area[]> {
-  return (await fetch("/areas")).json();
+export async function updatePins(areasAndPins: UpdateAreaDTO[]) {
+  return fetch("/area", {
+    method: "PUT",
+    body: JSON.stringify(areasAndPins),
+  });
 }

@@ -1,4 +1,5 @@
-import { createOrUpdateAreaAndPins } from "./create-or-update-areas-and-pins";
+import { createArea } from "./create-area";
+import { deleteArea } from "./delete-area";
 import { getAreas } from "./get-areas";
 
-export { createOrUpdateAreaAndPins, getAreas };
+export { createArea, deleteArea, getAreas };
