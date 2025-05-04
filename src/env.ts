@@ -14,6 +14,7 @@ const envSchema = z.object({
     .refine((val) => val >= 1000 && val <= 9999, {
       message: "Porta deve ser um número entre 1000 e 9999",
     }),
+  VITE_GOOGLE_MAPS_API_KEY: z.string().min(1),
   VITE_ENABLE_MSW: z.string().transform((value) => value === "true"),
 });
 
