@@ -18,5 +18,5 @@ export interface Area {
 }
 
 export async function getAreas(): Promise<Area[]> {
-  return (await fetch("/areas")).json();
+  return (await fetch("/area")).json();
 }

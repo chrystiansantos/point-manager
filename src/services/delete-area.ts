@@ -1,5 +1,5 @@
 export async function deleteArea(areaSelectId: string) {
-  return fetch(`/area?areaId=${areaSelectId}`, {
+  return fetch(`/area/${areaSelectId}`, {
     method: "DELETE",
   });
 }
