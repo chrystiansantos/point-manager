@@ -18,7 +18,7 @@ describe("Toast Component", () => {
 
     expect(element).not.toHaveClass("top-1");
     expect(element).toHaveClass(
-      "-top-20",
+      "-top-24",
       "border-neutral-light-300",
       "shadow-sm",
     );
@@ -39,7 +39,7 @@ describe("Toast Component", () => {
     const title = getByText("Title");
     const subTitle = getByText("SubTitle");
 
-    expect(element).not.toHaveClass("-top-20");
+    expect(element).not.toHaveClass("-top-24");
     expect(element).toHaveClass("top-1");
     expect(title).toBeInTheDocument();
     expect(subTitle).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe("Toast Component", () => {
     const subTitle = getByText("SubTitle");
     const button = getByRole("button");
 
-    expect(element).not.toHaveClass("-top-20");
+    expect(element).not.toHaveClass("-top-24");
     expect(element).toHaveClass("top-1");
 
     expect(title).toBeInTheDocument();

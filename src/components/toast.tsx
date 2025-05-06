@@ -11,7 +11,7 @@ type RootPropsType = "DEFAULT" | "ERROR";
 interface RootProps {
   children: ReactNode;
   open: boolean;
-  type: RootPropsType;
+  type?: RootPropsType;
 }
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
@@ -25,7 +25,7 @@ function Root({ children, open = false, type = "DEFAULT" }: RootProps) {
     <div
       data-testid="toast-root"
       className={twMerge(
-        "border-neutral-light-300 absolute -top-20 right-2 flex h-20 items-center gap-8 rounded-lg border-1 p-4 shadow-sm transition-all duration-500",
+        "border-neutral-light-300 fixed -top-24 right-2 flex h-20 min-w-80 items-center gap-8 rounded-lg border-1 p-4 shadow-sm transition-all duration-500",
         open && "top-1",
         type === "ERROR" && "border-red-500/30 shadow-red-500/30",
       )}
