@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { useNotificationStore } from "@/store/notification.store";
 import {
   Backspace,
   FloppyDiskBack,
@@ -23,6 +24,7 @@ enum ModalType {
 }
 
 export function ManagerButtons() {
+  const { updateNotification } = useNotificationStore()
   const {
     areas,
     isCreateNewArea,
@@ -57,7 +59,16 @@ export function ManagerButtons() {
   };
 
   const handleAddNewPin = () => {
-    if (areaSelectId) cratePin(areaSelectId);
+    if (areaSelectId) {
+      cratePin(areaSelectId)
+      updateNotification({
+        open: true,
+        callbackFunctionName: 'saveAreaAndPins',
+        title: "Salvar pontos",
+        subtitle: "Para salvar os pontos alterados clique em salvar",
+        type: 'DEFAULT'
+      })
+    };
   };
 
   const handleDeleteAllPins = () => {

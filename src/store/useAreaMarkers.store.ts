@@ -1,7 +1,9 @@
+import { env } from "@/env";
 import { getAreas } from "@/services";
 import { calculateCenterArea, getPosition } from "@/util";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { useNotificationStore } from "./notification.store";
 
 type Position = {
   lat: number;
@@ -35,7 +37,7 @@ type AreaMarkersType = {
   areaSelectId: string | null;
   createPositionsArea: Position[];
   areas: Areas[];
-  fetchAreas: () => void;
+  fetchAreas: () => Promise<void>;
   createArea: (isCreateNewArea: boolean) => void;
   addBorderArea: (position: Position) => void;
   removeLastBorder: () => void;
@@ -78,7 +80,29 @@ export const useAreaMarkersStore = create<AreaMarkersType>()(
                   },
                 }));
               })
-              .catch(console.error);
+              .catch((error) => {
+                // nteresting to implement an error observability tool
+                console.error(error);
+                const { updateNotification } = useNotificationStore.getState();
+                updateNotification({
+                  open: true,
+                  title: "Falha ao obter localização",
+                  subtitle:
+                    "Falha ao obter dados de localização pelo navegador",
+                  type: "ERROR",
+                  callbackFunctionName: "close",
+                  alertDurationInSeconds: 5,
+                });
+
+                set((state) => ({
+                  ...state,
+                  areas: [],
+                  centerMap: {
+                    lng: env.VITE_DEFAULT_LNG,
+                    lat: env.VITE_DEFAULT_LAT,
+                  },
+                }));
+              });
           }
           return {
             ...state,

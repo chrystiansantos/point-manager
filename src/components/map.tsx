@@ -1,3 +1,4 @@
+import { useNotificationStore } from "@/store/notification.store";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { Fragment, memo, useEffect } from "react";
 import { useAreaMarkersStore } from "../store/useAreaMarkers.store";
@@ -26,6 +27,7 @@ export const Map = memo(function MapMemoization() {
     id: "google-map-script",
     googleMapsApiKey: "",
   });
+  const { updateNotification } = useNotificationStore();
 
   const {
     fetchAreas,
@@ -68,6 +70,13 @@ export const Map = memo(function MapMemoization() {
     const polygon = new google.maps.Polygon({ paths: position });
     if (google.maps.geometry.poly.containsLocation(newPosition, polygon)) {
       changePositionPin(areaId, pin.id, newPosition);
+      updateNotification({
+        open: true,
+        callbackFunctionName: "saveAreaAndPins",
+        title: "Salvar pontos",
+        subtitle: "Para salvar os pontos alterados clique em salvar",
+        type: "DEFAULT",
+      });
     } else {
       changePositionPin(areaId, pin.id, pin.position);
     }
