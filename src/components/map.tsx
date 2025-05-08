@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { useNotificationStore } from "@/store/notification.store";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { Fragment, memo, useEffect } from "react";
@@ -25,7 +26,7 @@ const mapContainerStyle = {
 export const Map = memo(function MapMemoization() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "",
+    googleMapsApiKey: env.VITE_GOOGLE_MAPS_API_KEY,
   });
   const { updateNotification } = useNotificationStore();
 

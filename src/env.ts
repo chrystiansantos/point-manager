@@ -16,7 +16,7 @@ const envSchema = z.object({
     }),
   VITE_DEFAULT_LAT: z.string().transform((latitude) => Number(latitude)),
   VITE_DEFAULT_LNG: z.string().transform((longitude) => Number(longitude)),
-  VITE_GOOGLE_MAPS_API_KEY: z.string().min(1),
+  VITE_GOOGLE_MAPS_API_KEY: z.string(),
   VITE_ENABLE_MSW: z.string().transform((value) => value === "true"),
 });
 
