@@ -53,7 +53,7 @@ describe("ShowAlert Component", () => {
 
   it("should trigger handleSaveAreaAndPins when the button is clicked", async () => {
     render(<ShowAlert />);
-    const button = screen.getByRole("button", { name: /Save/i });
+    const button = screen.getByRole("button", { name: /Salvar/i });
 
     await act(async () => {
       fireEvent.click(button);
@@ -87,7 +87,7 @@ describe("ShowAlert Component", () => {
     });
 
     render(<ShowAlert />);
-    const button = screen.getByRole("button", { name: /Close/i });
+    const button = screen.getByRole("button", { name: /Fechar/i });
 
     fireEvent.click(button);
     expect(closeMock).toHaveBeenCalled();
