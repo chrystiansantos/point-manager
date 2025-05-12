@@ -1,3 +1,5 @@
+import { env } from "@/env";
+
 interface Position {
   lat: number;
   lng: number;
@@ -18,7 +20,7 @@ export interface CreateAreaDTO {
 }
 
 export async function createArea(areas: CreateAreaDTO) {
-  return fetch("/area", {
+  return fetch(`${env.VITE_API_URL}/area`, {
     method: "POST",
     body: JSON.stringify({
       ...areas,

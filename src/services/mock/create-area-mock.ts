@@ -1,10 +1,11 @@
 import { http, HttpResponse } from "msw";
 
+import { env } from "@/env";
 import { CreateAreaDTO } from "../create-area";
 import { createArea } from "./db-mock";
 
 export const createAreaMock = http.post<never, CreateAreaDTO>(
-  "http://localhost:3000/area",
+  `${env.VITE_API_URL}/area`,
   async ({ request }) => {
     const newArea = await request.json();
     const areas = createArea(newArea);

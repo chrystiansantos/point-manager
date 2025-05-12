@@ -1,3 +1,5 @@
+import { env } from "@/env";
+
 interface Position {
   lat: number;
   lng: number;
@@ -18,7 +20,8 @@ export interface UpdateAreaDTO {
 }
 
 export async function updatePins(areasAndPins: UpdateAreaDTO[]) {
-  return fetch("/area", {
+  console.log(areasAndPins, "area e pins update");
+  return fetch(`${env.VITE_API_URL}/area`, {
     method: "PUT",
     body: JSON.stringify(areasAndPins),
   });

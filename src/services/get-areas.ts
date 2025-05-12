@@ -1,3 +1,5 @@
+import { env } from "@/env";
+
 interface Position {
   lat: number;
   lng: number;
@@ -18,5 +20,5 @@ export interface Area {
 }
 
 export async function getAreas(): Promise<Area[]> {
-  return (await fetch("/area")).json();
+  return (await fetch(`${env.VITE_API_URL}/area`)).json();
 }

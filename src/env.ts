@@ -18,6 +18,7 @@ const envSchema = z.object({
   VITE_DEFAULT_LNG: z.string().transform((longitude) => Number(longitude)),
   VITE_GOOGLE_MAPS_API_KEY: z.string(),
   VITE_ENABLE_MSW: z.string().transform((value) => value === "true"),
+  VITE_API_URL: z.string().url(),
 });
 
 export const env = envSchema.parse(import.meta.env);
