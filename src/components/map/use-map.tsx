@@ -1,16 +1,8 @@
 import { env } from "@/env";
 import { useNotificationStore } from "@/store/notification.store";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { Fragment, memo, useEffect } from "react";
-import { useAreaMarkersStore } from "../store/useAreaMarkers.store";
-import { Loading } from "./loading";
-import { Marker } from "./marker";
-import { Polygon } from "./polygon";
-
-type Position = {
-  lat: number;
-  lng: number;
-};
+import { useAreaMarkersStore } from "@/store/useAreaMarkers.store";
+import { useJsApiLoader } from "@react-google-maps/api";
+import { useEffect } from "react";
 
 interface Pin {
   id: string;
@@ -18,12 +10,17 @@ interface Pin {
   position: Position;
 }
 
-const mapContainerStyle = {
-  width: "100%",
-  height: "100%",
+type Position = {
+  lat: number;
+  lng: number;
 };
 
-export const Map = memo(function MapMemoization() {
+export function useMap() {
+  const mapContainerStyle = {
+    width: "100%",
+    height: "100%",
+  };
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: env.VITE_GOOGLE_MAPS_API_KEY,
@@ -87,47 +84,18 @@ export const Map = memo(function MapMemoization() {
     fetchAreas();
   }, [fetchAreas]);
 
-  if (!isLoaded || !centerMap) return <Loading />;
-
-  return (
-    <GoogleMap
-      mapContainerStyle={mapContainerStyle}
-      center={centerMap}
-      zoom={14}
-      onClick={handleClickMap}
-      options={{
-        mapTypeId: google.maps.MapTypeId.SATELLITE,
-        fullscreenControl: false,
-        mapTypeControl: false,
-        streetViewControl: false,
-        zoomControl: true,
-        cameraControl: false,
-        zoomControlOptions: {
-          position: google.maps.ControlPosition.TOP_RIGHT,
-        },
-      }}
-    >
-      {areas?.map((area) => (
-        <Fragment key={area.id}>
-          <Polygon
-            path={area.position}
-            onClick={() => handleClickArea(area.id)}
-            select={area.id === areaSelectId}
-          />
-          {area.pins.map((pin) => (
-            <Marker
-              key={pin.id}
-              draggable={pinSelectId === pin.id}
-              onClick={() => handleSelectArea(area.id, pin.id)}
-              onDragEnd={(event) =>
-                handleDragEnd(event, area.id, pin, area.position)
-              }
-              position={pin.position}
-            />
-          ))}
-        </Fragment>
-      ))}
-      {isCreateNewArea && <Polygon path={createPositionsArea} select={false} />}
-    </GoogleMap>
-  );
-});
+  return {
+    isLoaded,
+    centerMap,
+    mapContainerStyle,
+    handleClickMap,
+    areas,
+    handleClickArea,
+    areaSelectId,
+    pinSelectId,
+    handleSelectArea,
+    handleDragEnd,
+    isCreateNewArea,
+    createPositionsArea,
+  };
+}
