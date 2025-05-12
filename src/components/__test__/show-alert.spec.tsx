@@ -21,8 +21,8 @@ describe("ShowAlert Component", () => {
       notification: {
         open: true,
         type: "DEFAULT",
-        title: "Teste Título",
-        subtitle: "Teste Subtítulo",
+        title: "Test Title",
+        subtitle: "Test Subtitle",
         callbackFunctionName: "saveAreaAndPins",
         alertDurationInSeconds: 2,
       },
@@ -44,16 +44,16 @@ describe("ShowAlert Component", () => {
     vi.clearAllTimers();
   });
 
-  it("deve renderizar o Toast com título e subtítulo", () => {
+  it("should render the Toast with title and subtitle", () => {
     render(<ShowAlert />);
 
-    expect(screen.getByText("Teste Título")).toBeInTheDocument();
-    expect(screen.getByText("Teste Subtítulo")).toBeInTheDocument();
+    expect(screen.getByText("Test Title")).toBeInTheDocument();
+    expect(screen.getByText("Test Subtitle")).toBeInTheDocument();
   });
 
-  it("deve disparar handleSaveAreaAndPins ao clicar no botão", async () => {
+  it("should trigger handleSaveAreaAndPins when the button is clicked", async () => {
     render(<ShowAlert />);
-    const button = screen.getByRole("button", { name: /Salvar/i });
+    const button = screen.getByRole("button", { name: /Save/i });
 
     await act(async () => {
       fireEvent.click(button);
@@ -64,7 +64,7 @@ describe("ShowAlert Component", () => {
     expect(closeMock).toHaveBeenCalled();
   });
 
-  it("deve fechar o toast automaticamente após o tempo", () => {
+  it("should automatically close the toast after the duration", () => {
     render(<ShowAlert />);
     act(() => {
       vi.advanceTimersByTime(2000);
@@ -73,13 +73,13 @@ describe("ShowAlert Component", () => {
     expect(closeMock).toHaveBeenCalled();
   });
 
-  it('deve fechar o toast manualmente quando callbackFunctionName for "close"', () => {
+  it('should manually close the toast when callbackFunctionName is "close"', () => {
     (useNotificationStore as unknown as Mock).mockReturnValue({
       notification: {
         open: true,
         type: "DEFAULT",
-        title: "Teste Título",
-        subtitle: "Teste Subtítulo",
+        title: "Test Title",
+        subtitle: "Test Subtitle",
         callbackFunctionName: "close",
         alertDurationInSeconds: null,
       },
@@ -87,7 +87,7 @@ describe("ShowAlert Component", () => {
     });
 
     render(<ShowAlert />);
-    const button = screen.getByRole("button", { name: /Fechar/i });
+    const button = screen.getByRole("button", { name: /Close/i });
 
     fireEvent.click(button);
     expect(closeMock).toHaveBeenCalled();
