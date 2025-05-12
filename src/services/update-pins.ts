@@ -20,7 +20,6 @@ export interface UpdateAreaDTO {
 }
 
 export async function updatePins(areasAndPins: UpdateAreaDTO[]) {
-  console.log(areasAndPins, "area e pins update");
   return fetch(`${env.VITE_API_URL}/area`, {
     method: "PUT",
     body: JSON.stringify(areasAndPins),
