@@ -20,7 +20,7 @@ A estrutura do projeto segue o princípio de **separação de responsabilidades*
 
 - **Testes unitários** com [Vitest](https://vitest.dev/) e [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/);
 - **Testes de ponta a ponta (E2E)** com [Playwright](https://playwright.dev/), garantindo maior **segurança e estabilidade** no desenvolvimento de novas funcionalidades;
-- Documento de [**BDD (Behavior-Driven Development)**](https://github.com/chrystiansantos/point-manager/Behavior-Driven-Development.md) descrevendo os comportamentos esperados, permitindo a escrita de cenários de teste próximos à experiência real do usuário.
+- Documento de [**BDD (Behavior-Driven Development)**](./Behavior-Driven-Development.md) descrevendo os comportamentos esperados, permitindo a escrita de cenários de teste próximos à experiência real do usuário.
 
 ### Tecnologias Utilizadas
 
