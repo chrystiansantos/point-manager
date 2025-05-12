@@ -2,9 +2,8 @@ import { updatePins } from "@/services/update-pins";
 import { useNotificationStore } from "@/store/notification.store";
 import { useAreaMarkersStore } from "@/store/useAreaMarkers.store";
 import { useEffect } from "react";
-import { Toast } from "./toast";
 
-export function ShowAlert() {
+export function useShowAlert() {
   const { areas, fetchAreas } = useAreaMarkersStore();
   const { notification, close } = useNotificationStore();
 
@@ -39,17 +38,8 @@ export function ShowAlert() {
     },
   };
 
-  return (
-    <Toast.Root open={notification.open} type={notification.type}>
-      <Toast.WrapperInfo>
-        <Toast.Title>{notification.title}</Toast.Title>
-        <Toast.SubTitle>{notification.subtitle}</Toast.SubTitle>
-      </Toast.WrapperInfo>
-      <Toast.Button
-        onClick={callbackFunctions[notification.callbackFunctionName].action}
-      >
-        {callbackFunctions[notification.callbackFunctionName].buttonName}
-      </Toast.Button>
-    </Toast.Root>
-  );
+  return {
+    notification,
+    callbackFunctions,
+  };
 }
