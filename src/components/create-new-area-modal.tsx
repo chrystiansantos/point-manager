@@ -1,4 +1,5 @@
 import { createArea } from "@/services";
+import { useNotificationStore } from "@/store/notification.store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MapPinArea } from "@phosphor-icons/react/dist/ssr";
 import { useForm } from "react-hook-form";
@@ -19,7 +20,7 @@ interface CreateAreaModalProps {
 export function CreateNewAreaModal({ closeModal }: CreateAreaModalProps) {
   const { createPositionsArea, resetCreateArea, fetchAreas } =
     useAreaMarkersStore();
-
+  const { close } = useNotificationStore();
   const {
     register,
     handleSubmit,
@@ -40,6 +41,7 @@ export function CreateNewAreaModal({ closeModal }: CreateAreaModalProps) {
     resetCreateArea();
     fetchAreas();
     closeModal();
+    close();
   };
 
   return (
