@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-import { useNotificationStore } from "@/store/notification.store";
 import {
   Backspace,
   FloppyDiskBack,
@@ -7,81 +6,32 @@ import {
   MapPinArea,
   TrashSimple,
 } from "@phosphor-icons/react";
-import { useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { useAreaMarkersStore } from "../store/useAreaMarkers.store";
-import { Button } from "./button";
-import { CreateNewAreaModal } from "./create-new-area-modal";
-import { DeleteAllPins } from "./delete-all-pins";
-import { DeleteArea } from "./delete-area";
-import { DeletePin } from "./delete-pin";
-
-enum ModalType {
-  CreateArea = "CreateArea",
-  DeleteArea = "DeleteArea",
-  DeletePin = "DeletePin",
-  DeleteAllPins = "DeleteAllPins",
-}
+import { Button } from "../button";
+import { CreateNewAreaModal } from "../create-new-area-modal";
+import { DeleteAllPins } from "../delete-all-pins";
+import { DeleteArea } from "../delete-area";
+import { DeletePin } from "../delete-pin";
+import { useManagerButtons } from "./use-manager-buttons";
 
 export function ManagerButtons() {
-  const { updateNotification } = useNotificationStore()
   const {
-    areas,
-    isCreateNewArea,
-    createArea,
-    createPositionsArea,
-    removeLastBorder,
-    resetCreateArea,
-    areaSelectId,
     pinSelectId,
-    cratePin,
-  } = useAreaMarkersStore();
-
-  const [showModalType, setShowModalType] = useState<ModalType | null>(null);
-
-  const selectArea = areas.find((area) => area.id === areaSelectId);
-
-  const handleAddNewArea = () => createArea(true);
-
-  const handleRemoveLastBorder = () => {
-    if (createPositionsArea.length === 2) {
-      return resetCreateArea();
-    }
-    removeLastBorder();
-  };
-
-  const handleSaveNewArea = async () => {
-    setShowModalType(ModalType.CreateArea);
-  };
-
-  const handleDeleteArea = async () => {
-    setShowModalType(ModalType.DeleteArea);
-  };
-
-  const handleAddNewPin = () => {
-    if (areaSelectId) {
-      cratePin(areaSelectId)
-      updateNotification({
-        open: true,
-        callbackFunctionName: 'saveAreaAndPins',
-        title: "Salvar pontos",
-        subtitle: "Para salvar os pontos alterados clique em salvar",
-        type: 'DEFAULT'
-      })
-    };
-  };
-
-  const handleDeleteAllPins = () => {
-    setShowModalType(ModalType.DeleteAllPins);
-  };
-
-  const handleDeletePin = () => {
-    setShowModalType(ModalType.DeletePin);
-  };
-
-  const closeModal = () => {
-    setShowModalType(null);
-  };
+    handleDeletePin,
+    areaSelectId,
+    selectArea,
+    handleDeleteArea,
+    handleAddNewPin,
+    isCreateNewArea,
+    createPositionsArea,
+    handleRemoveLastBorder,
+    handleSaveNewArea,
+    handleAddNewArea,
+    handleDeleteAllPins,
+    ModalType,
+    showModalType,
+    closeModal,
+  } = useManagerButtons();
 
   return (
     <div className="absolute right-0 bottom-0">
