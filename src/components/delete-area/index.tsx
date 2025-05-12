@@ -1,28 +1,13 @@
-import { deleteArea } from "@/services";
-import { useNotificationStore } from "@/store/notification.store";
 import { Trash } from "@phosphor-icons/react/dist/ssr";
-import { useAreaMarkersStore } from "../store/useAreaMarkers.store";
-import { Modal } from "./modal";
+import { Modal } from "../modal";
+import { useDeleteArea } from "./use-delete-area";
 
 interface DeleteAreaProps {
   closeModal: () => void;
 }
 
 export function DeleteArea({ closeModal }: DeleteAreaProps) {
-  const { areaSelectId, selectAreaAndPinId, fetchAreas } =
-    useAreaMarkersStore();
-  const { close } = useNotificationStore();
-
-  const handleDeleteArea = async () => {
-    if (areaSelectId) {
-      await deleteArea(areaSelectId);
-      selectAreaAndPinId(null);
-      fetchAreas();
-      closeModal();
-      close();
-    }
-  };
-
+  const { handleDeleteArea } = useDeleteArea({ closeModal });
   return (
     <Modal>
       <Modal.Header onClose={closeModal} />
