@@ -1,29 +1,13 @@
-import { useNotificationStore } from "@/store/notification.store";
 import { Trash } from "@phosphor-icons/react/dist/ssr";
-import { useAreaMarkersStore } from "../store/useAreaMarkers.store";
-import { Modal } from "./modal";
+import { Modal } from "../modal";
+import { useDeletePin } from "./use-delete-pin";
 
 interface DeletePinProps {
   closeModal: () => void;
 }
 
 export function DeletePin({ closeModal }: DeletePinProps) {
-  const { areaSelectId, pinSelectId, removePin } = useAreaMarkersStore();
-  const { updateNotification } = useNotificationStore();
-
-  function handleDeletePin() {
-    if (areaSelectId && pinSelectId) {
-      removePin(areaSelectId, pinSelectId);
-      closeModal();
-      updateNotification({
-        open: true,
-        callbackFunctionName: "saveAreaAndPins",
-        title: "Salvar pontos",
-        subtitle: "Para salvar os pontos alterados clique em salvar",
-        type: "DEFAULT",
-      });
-    }
-  }
+  const { handleDeletePin } = useDeletePin({ closeModal });
 
   return (
     <Modal>
