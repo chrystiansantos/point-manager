@@ -1,54 +1,115 @@
-# React + TypeScript + Vite
+# Gerenciador de Marcadores 🌿
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta aplicação foi desenvolvida com o objetivo de ser um **gerenciador de marcadores em áreas geográficas**, auxiliando no **monitoramento e manejo de lavouras**. Com ela, o usuário pode:
 
-Currently, two official plugins are available:
+- Selecionar e demarcar áreas específicas no mapa;
+- Adicionar marcadores dentro dessas áreas;
+- Deletar um ou vários marcadores conforme a necessidade.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Essa funcionalidade permite identificar pontos críticos onde alguma ação precisa ser tomada na lavoura.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ⚙️ Estrutura e Tecnologias
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Separação de Responsabilidades
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+A estrutura do projeto segue o princípio de **separação de responsabilidades**, onde o JSX (estrutura visual) dos componentes é separado da lógica de funcionamento, facilitando a **manutenção e escalabilidade**.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Testes
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **Testes unitários** com [Vitest](https://vitest.dev/) e [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/);
+- **Testes de ponta a ponta (E2E)** com [Playwright](https://playwright.dev/), garantindo maior **segurança e estabilidade** no desenvolvimento de novas funcionalidades;
+- Documento de [**BDD (Behavior-Driven Development)**](https://github.com/chrystiansantos/point-manager/Behavior-Driven-Development.md) descrevendo os comportamentos esperados, permitindo a escrita de cenários de teste próximos à experiência real do usuário.
+
+### Tecnologias Utilizadas
+
+- **Interface** construída com [Tailwind CSS](https://tailwindcss.com/), garantindo alta **produtividade e consistência visual**.
+- Para renderização do mapa, utilizamos a biblioteca [`@react-google-maps/api`](https://www.npmjs.com/package/@react-google-maps/api), totalmente compatível com React, moderna, leve e com suporte a recursos avançados de mapas.
+- O **gerenciamento de estado** é feito com [Zustand](https://zustand-demo.pmnd.rs/), proporcionando uma abordagem simples e eficiente.
+- Como ainda não há uma API pronta para consumo, optamos por utilizar o [MSW (Mock Service Worker)](https://mswjs.io/) para simular requisições HTTP, permitindo o desenvolvimento e testes independentes do backend.
+
+---
+
+## 📦 Como Rodar o Projeto
+
+### Requisitos
+
+- **Node.js**.
+- **Yarn** ou **npm** para gerenciar pacotes.
+
+### Instalação
+
+1. Clone este repositório:
+
+   ```bash
+   git clone https://github.com/chrystiansantos/point-manager
+   ```
+
+2. Navegue até o diretório do projeto:
+
+   ```bash
+   cd point-manager
+   ```
+
+3. Instale as dependências:
+
+   - Usando o npm:
+
+   ```bash
+   npm install
+   ```
+
+   - Usando o Yarn:
+
+   ```bash
+   yarn install
+   ```
+
+4. Duplique o arquivo .env-example e renomeie-o para .env. Em seguida, preencha as variáveis de ambiente conforme necessário.
+
+5. Para rodar o projeto no ambiente de desenvolvimento:
+
+   - Usando o npm:
+
+   ```bash
+   npm run dev
+   ```
+
+   - Usando o Yarn:
+
+   ```bash
+   yarn dev
+   ```
+
+6. Para executar os teste unitarios:
+
+- Usando o npm:
+
+  ```bash
+  npm run test
+  ```
+
+  - Usando o Yarn:
+
+  ```bash
+  yarn test
+  ```
+
+7. Para executar os teste end to end:
+
+- Usando o npm:
+
+  ```bash
+   npx playwright test --ui
+  ```
+
+  - Usando o Yarn:
+
+  ```bash
+  yarn playwright test --ui
+  ```
+
+A aplicação estará disponível em [http://localhost:3000](http://localhost:3000).
+
+https://github.com/user-attachments/assets/e2934d20-e9ed-47d2-9b37-0bfbce1847c4
