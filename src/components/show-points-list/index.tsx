@@ -1,25 +1,10 @@
-import { useAreaMarkersStore } from "@/store/useAreaMarkers.store";
 import { Fragment } from "react";
-import { ListPoints } from "./points-list";
-
-type Position = {
-  lat: number;
-  lng: number;
-};
+import { ListPoints } from "../points-list";
+import { useShowPointsList } from "./use-show-points-list";
 
 export function ShowPointsList() {
-  const {
-    isCreateNewArea,
-    areas,
-    pinSelectId,
-    selectAreaAndPinId,
-    updateCenterMap,
-  } = useAreaMarkersStore();
-
-  function handleSelectPin(areaId: string, pinId: string, position: Position) {
-    selectAreaAndPinId(areaId, pinId);
-    updateCenterMap(position);
-  }
+  const { areas, pinSelectId, isCreateNewArea, handleSelectPin } =
+    useShowPointsList();
 
   return (
     <div className="absolute top-0 z-10">
